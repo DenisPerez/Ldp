@@ -8,4 +8,4 @@ module Pascal where
     
     triangulo :: Int -> [[Int]]
     triangulo 1 = [[1]]
-    triangulo n = pascal n : triangulo (n-1)
+    triangulo n = reverse(pascal n : reverse(triangulo (n-1)))

@@ -1,3 +1,4 @@
+module Permutaciones where
 import Data.List
 
 permutacion :: Eq a => [a] -> [[a]]
