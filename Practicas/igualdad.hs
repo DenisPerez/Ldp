@@ -3,4 +3,4 @@ module Igualdad where
     igualdad [] [] = True
     igualdad [] xs = False
     igualdad xs [] = False
-    igualdad (x:xs) (y:ys) = x==y && igualdad xs ys
+    igualdad (x:xs) (y:rs) = x==y && igualdad xs rs
