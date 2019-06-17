@@ -38,3 +38,27 @@ module Main where
     espejoespecular :: Arbol a -> Arbol a
     espejoespecular (H a) = H a
     espejoespecular (N x i d) = N x (espejoespecular d) (espejoespecular i)
+
+    takeArbol :: Int -> Arbol a -> Arbol a
+    takeArbol _ (H a) = H a
+    takeArbol 0 (N x i d) = H x
+    takeArbol n (N x i d) = N x (takeArbol (n-1) i) (takeArbol (n-1) d)
+
+    mapArbol :: (a->a)->Arbol a->Arbol a
+    mapArbol funcion (H a) = H (funcion a)
+    mapArbol funcion (N x izquierdo derecho) = N (funcion x) (mapArbol funcion izquierdo) (mapArbol funcion derecho)
+
+    nodosxnivel :: Int -> Arbol Int -> [Int]
+    nodosxnivel 0 (N x i d) = [x]
+    nodosxnivel 0 (N _ i d) = nodosxnivel 0 i ++ nodosxnivel 0 d
+    nodosxnivel k (N x i d) = if eshoja (i) && eshoja (d) then nodosxnivel 0 i ++ nodosxnivel 0 d else nodosxnivel (k-1) i ++ nodosxnivel (k-1) d
+
+    
+    eshoja :: Arbol a -> Bool
+    eshoja (H x) = True
+    eshoja (N x i d) = False
+
+
+    repeatArbol :: a -> Arbol a
+    repeatArbol x = N x t t
+            where t = repeatArbol x
